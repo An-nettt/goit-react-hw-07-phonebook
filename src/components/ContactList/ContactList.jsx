@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 
 import { getContacts, getFilter } from 'redux/selectors';
@@ -12,8 +12,9 @@ const ContactList = () => {
 
   const getVisibleContacts = () => {
     const normalizedFilter = String(filterContact).toLowerCase();
+    console.log(contacts.contacts.items);
 
-    return contacts.filter(contact =>
+    return contacts.contacts.items.filter(contact =>
       contact.name.toLowerCase().includes(normalizedFilter)
     );
   };
@@ -31,10 +32,10 @@ const ContactList = () => {
 
 export default ContactList;
 
-ContactList.propTypes = {
-  contactsArrayOf: PropTypes.arrayOf(PropTypes.string),
-  onDeleteContact: PropTypes.func.isRequired,
-  id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  number: PropTypes.number.isRequired,
-};
+// ContactList.propTypes = {
+//   contactsArrayOf: PropTypes.arrayOf(PropTypes.string),
+//   onDeleteContact: PropTypes.func.isRequired,
+//   id: PropTypes.string.isRequired,
+//   name: PropTypes.string.isRequired,
+//   number: PropTypes.number.isRequired,
+// };
