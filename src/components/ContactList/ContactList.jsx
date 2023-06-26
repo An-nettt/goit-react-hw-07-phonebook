@@ -1,4 +1,4 @@
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
@@ -51,10 +51,10 @@ const ContactList = () => {
 
 export default ContactList;
 
-// ContactList.propTypes = {
-//   contactsArrayOf: PropTypes.arrayOf(PropTypes.string),
-//   onDeleteContact: PropTypes.func.isRequired,
-//   id: PropTypes.string.isRequired,
-//   name: PropTypes.string.isRequired,
-//   number: PropTypes.number.isRequired,
-// };
+ContactList.propTypes = {
+  contactsArrayOf: PropTypes.arrayOf(PropTypes.string),
+  onDeleteContact: PropTypes.func.isRequired,
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  number: PropTypes.number.isRequired,
+};

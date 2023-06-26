@@ -1,4 +1,4 @@
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import { useDispatch } from 'react-redux';
 
@@ -27,7 +27,7 @@ const ContactListElem = ({ contactsEl }) => {
 
 export default ContactListElem;
 
-// ContactListElem.propTypes = {
-//   contactsEl: PropTypes.arrayOf(PropTypes.string),
-//   onDeleteContact: PropTypes.func.isRequired,
-// };
+ContactListElem.propTypes = {
+  contactsEl: PropTypes.arrayOf(PropTypes.string),
+  onDeleteContact: PropTypes.func.isRequired,
+};
