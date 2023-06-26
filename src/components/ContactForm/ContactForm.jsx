@@ -3,8 +3,9 @@ import { nanoid } from 'nanoid';
 // import PropTypes from 'prop-types';
 
 import { getContacts } from 'redux/selectors';
-import { addToContacts } from 'redux/contacts/contactsSlice';
+// import { addToContacts } from 'redux/contacts/contactsSlice';
 import { PhonebookForm, Text, Input, Button } from '../../styled';
+import { addContact } from 'redux/contacts/thunks';
 
 const ContactForm = () => {
   const contacts = useSelector(getContacts);
@@ -20,6 +21,8 @@ const ContactForm = () => {
       number: form.elements.number.value,
     };
 
+    dispatch(addContact(newContact));
+
     const auditContacts = contacts.filter(
       contact => contact.name.toLowerCase() === newContact.name.toLowerCase()
     );
@@ -28,7 +31,6 @@ const ContactForm = () => {
       alert(`${newContact.name} is already in contacts.`);
       return;
     }
-    dispatch(addToContacts(newContact));
 
     form.reset();
   };
