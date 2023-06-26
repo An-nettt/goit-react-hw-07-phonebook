@@ -3,7 +3,6 @@ import { nanoid } from 'nanoid';
 // import PropTypes from 'prop-types';
 
 import { getContacts } from 'redux/selectors';
-// import { addToContacts } from 'redux/contacts/contactsSlice';
 import { PhonebookForm, Text, Input, Button } from '../../styled';
 import { addContact } from 'redux/contacts/thunks';
 
@@ -20,8 +19,6 @@ const ContactForm = () => {
       name: form.elements.name.value,
       number: form.elements.number.value,
     };
-    // dispatch(addContact(newContact));
-    console.log(contacts.items);
 
     const auditContacts = contacts.items.filter(
       contact => contact.name.toLowerCase() === newContact.name.toLowerCase()

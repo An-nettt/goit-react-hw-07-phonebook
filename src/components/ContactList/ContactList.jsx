@@ -12,6 +12,7 @@ import { fetchContacts } from 'redux/contacts/thunks';
 import ContactListElem from '../ContactListElem/ContactListElem';
 
 import { ContactListWrapper } from '../../styled';
+import Loader from 'components/Loader/Loader';
 
 const ContactList = () => {
   const dispatch = useDispatch();
@@ -27,7 +28,6 @@ const ContactList = () => {
 
   const getVisibleContacts = () => {
     const normalizedFilter = String(filterContact).toLowerCase();
-    console.log(contacts.items);
 
     return contacts.items.filter(contact =>
       contact.name.toLowerCase().includes(normalizedFilter)
@@ -38,7 +38,7 @@ const ContactList = () => {
 
   return (
     <div>
-      {isLoading && <p>Loading tasks...</p>}
+      {isLoading && <Loader />}
       {error && <p>{error}</p>}
       <ContactListWrapper>
         {filterContacts.map(({ id, name, number }) => (

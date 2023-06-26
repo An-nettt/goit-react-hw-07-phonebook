@@ -4,8 +4,6 @@ import { useDispatch } from 'react-redux';
 
 import { deleteContact } from 'redux/contacts/thunks';
 
-// import { deleteContact } from 'redux/contacts/contactsSlice';
-
 import { ContactListEl, Text, ButtonDel } from '../../styled';
 
 const ContactListElem = ({ contactsEl }) => {

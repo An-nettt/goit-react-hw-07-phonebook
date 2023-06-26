@@ -2,9 +2,9 @@ import { createSlice } from '@reduxjs/toolkit';
 import { contactsInitialState } from './contactsInitialState';
 import { addContact, deleteContact, fetchContacts } from './thunks';
 import {
-  handleFulfilledAdd,
-  handleFulfilledAll,
-  handleFulfilledDel,
+  AddHandleFulfilled,
+  AllHandleFulfilled,
+  DelHandleFulfilled,
   handlePending,
   handleRejected,
 } from './handlers';
@@ -12,29 +12,20 @@ import {
 export const contactsSlice = createSlice({
   name: 'contacts',
   initialState: contactsInitialState,
-  // reducers: {
-  //   addToContacts(state, action) {
-  //     state.push(action.payload);
-  //   },
-  //   deleteContact(state, action) {
-  //     return state.filter(contact => contact.id !== action.payload);
-  //   },
-  // },
   extraReducers: builder => {
     builder
+      .addCase(fetchContacts.pending, handlePending)
+      .addCase(fetchContacts.fulfilled, AllHandleFulfilled)
+      .addCase(fetchContacts.rejected, handleRejected)
 
-      .addCase(fetchContacts.fulfilled, handleFulfilledAll)
-      .addCase(addContact.fulfilled, handleFulfilledAdd)
-      .addCase(deleteContact.fulfilled, handleFulfilledDel)
+      .addCase(addContact.pending, handlePending)
+      .addCase(addContact.fulfilled, AddHandleFulfilled)
+      .addCase(addContact.rejected, handleRejected)
 
-      .addMatcher(action => {
-        action.type.endsWith('/pending');
-      }, handlePending)
-      .addMatcher(action => {
-        action.type.endsWith('/rejected');
-      }, handleRejected);
+      .addCase(deleteContact.pending, handlePending)
+      .addCase(deleteContact.fulfilled, DelHandleFulfilled)
+      .addCase(deleteContact.rejected, handleRejected);
   },
 });
 
-// export const { addToContacts, deleteContact } = contactsSlice.actions;
 export const contactsReducer = contactsSlice.reducer;
