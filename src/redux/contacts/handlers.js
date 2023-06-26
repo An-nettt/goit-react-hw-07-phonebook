@@ -20,5 +20,6 @@ export const handleFulfilledAdd = (state, { payload }) => {
 
 export const handleFulfilledDel = (state, { payload }) => {
   state.isLoading = false;
-  state.items.filter(contact => contact.id !== payload);
+  const index = state.items.findIndex(contact => contact.id === payload.id);
+  state.items.splice(index, 1);
 };
