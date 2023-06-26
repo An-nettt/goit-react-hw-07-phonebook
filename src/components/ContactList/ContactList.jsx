@@ -1,20 +1,35 @@
 // import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
-import { getContacts, getFilter } from 'redux/selectors';
+import {
+  getContacts,
+  getError,
+  getFilter,
+  getIsLoading,
+} from 'redux/selectors';
+import { fetchContacts } from 'redux/contacts/thunks';
 import ContactListElem from '../ContactListElem/ContactListElem';
 
 import { ContactListWrapper } from '../../styled';
 
 const ContactList = () => {
+  const dispatch = useDispatch();
+
   const contacts = useSelector(getContacts);
+  const isLoading = useSelector(getIsLoading);
+  const error = useSelector(getError);
   const filterContact = useSelector(getFilter);
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   const getVisibleContacts = () => {
     const normalizedFilter = String(filterContact).toLowerCase();
-    console.log(contacts.contacts.items);
+    console.log(contacts.items);
 
-    return contacts.contacts.items.filter(contact =>
+    return contacts.items.filter(contact =>
       contact.name.toLowerCase().includes(normalizedFilter)
     );
   };
@@ -22,11 +37,15 @@ const ContactList = () => {
   const filterContacts = getVisibleContacts();
 
   return (
-    <ContactListWrapper>
-      {filterContacts.map(({ id, name, number }) => (
-        <ContactListElem contactsEl={{ id, name, number }} />
-      ))}
-    </ContactListWrapper>
+    <div>
+      {isLoading && <p>Loading tasks...</p>}
+      {error && <p>{error}</p>}
+      <ContactListWrapper>
+        {filterContacts.map(({ id, name, number }) => (
+          <ContactListElem contactsEl={{ id, name, number }} />
+        ))}
+      </ContactListWrapper>
+    </div>
   );
 };
 
