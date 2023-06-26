@@ -20,17 +20,19 @@ const ContactForm = () => {
       name: form.elements.name.value,
       number: form.elements.number.value,
     };
+    // dispatch(addContact(newContact));
+    console.log(contacts.items);
 
-    dispatch(addContact(newContact));
-
-    const auditContacts = contacts.filter(
+    const auditContacts = contacts.items.filter(
       contact => contact.name.toLowerCase() === newContact.name.toLowerCase()
     );
 
-    if (auditContacts === 0) {
+    if (auditContacts.length === 1) {
       alert(`${newContact.name} is already in contacts.`);
       return;
     }
+
+    dispatch(addContact(newContact));
 
     form.reset();
   };

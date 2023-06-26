@@ -17,3 +17,8 @@ export const handleFulfilledAdd = (state, { payload }) => {
   state.isLoading = false;
   state.items.push(payload);
 };
+
+export const handleFulfilledDel = (state, { payload }) => {
+  state.isLoading = false;
+  state.items.filter(contact => contact.id !== payload);
+};
